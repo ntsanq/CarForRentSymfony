@@ -28,6 +28,7 @@ $ sudo apt install symfony-cli
 Install the project's dependency into vendor:
 ```sh  
 $ cd SymfonyCarForRent/
+
 $ composer install
 ``` 
 
