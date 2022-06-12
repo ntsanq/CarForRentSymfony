@@ -13,7 +13,7 @@ class HomeController extends AbstractController
 {
     /**
      * @Route (
-     *     "/home",
+     *     "/",
      *     name = "app_home"
      * )
      * @return Response

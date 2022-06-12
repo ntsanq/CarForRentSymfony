@@ -63,4 +63,15 @@ class BlogController extends AbstractController
     {
         return new Response("this is function show less priority: $input");
     }
+
+    /**
+     * @Route("/blog/hello/{page}", name="blog_hello", defaults={"page": 1, "title": "Hello world!"})
+     */
+    public function helloWorld($page ,$title ): Response
+    {
+        return new Response("Page is ".$page." and Title is ".$title);
+    }
+    
+    
+    
 }
