@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Repository\CarRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class CarController extends AbstractController
     }
 
     /**
-     * @Route("/addCar", name="add_car")
+     * @Route("/addcar", name="add_car")
      */
     public function addCar(ManagerRegistry $doctrine): Response
     {
@@ -28,6 +29,7 @@ class CarController extends AbstractController
         $product->setName('Vis');
         $product->setDescription('This car is good!');
         $product->setPrice(122);
+        $product->setImg('https://sdhd.sdfjfsod/dsfjsdfiudsf');
         $entityManager->persist($product);
         $entityManager->flush();
 
@@ -54,5 +56,17 @@ class CarController extends AbstractController
     public function showByEntity(Car $car): Response
     {
         return new Response("The car with the id is: " . $car->getName());
+    }
+
+    /**
+     * @Route(
+     *     "/allcar",
+     *     name = "show_all_car"
+     * )
+     */
+    public function showAllCars(CarRepository $carRepository)
+    {
+        $cars = $carRepository->findAll();
+        return $this->render('home/index.html.twig', ['cars' => $cars]);
     }
 }

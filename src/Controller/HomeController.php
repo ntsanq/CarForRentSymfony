@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use Psr\Log\LoggerInterface;
+use App\Repository\CarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,13 +15,13 @@ class HomeController extends AbstractController
      *     "/",
      *     name = "app_home"
      * )
+     * @param CarRepository $carRepository
      * @return Response
      */
-    public function index(): Response
+    public function index(CarRepository $carRepository): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController'
-        ]);
+        $cars = $carRepository->findAll();
+        return $this->render('home/index.html.twig', ['cars' => $cars]);
     }
 
     /**

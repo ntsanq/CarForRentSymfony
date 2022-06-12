@@ -22,6 +22,9 @@ class Car
     #[ORM\Column(type: 'bigint')]
     private $price;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $img;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Car
     public function setPrice(string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }
