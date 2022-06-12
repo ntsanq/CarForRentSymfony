@@ -34,7 +34,7 @@ class HomeController extends AbstractController
     public function showKey(ParameterBagInterface $parameterBag): Response
     {
         $s3key = $parameterBag->get('s3Secret');
-        return $this->render('/home/key.html.twig',[
+        return $this->render('/home/key.html.twig', [
             's3key' => $s3key
         ]);
     }

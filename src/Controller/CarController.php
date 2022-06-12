@@ -14,7 +14,7 @@ class CarController extends AbstractController
     public function index(): Response
     {
         return $this->render('car/index.html.twig', [
-            'controller_name' =>    'CarController',
+            'controller_name' => 'CarController',
         ]);
     }
 
@@ -24,17 +24,14 @@ class CarController extends AbstractController
     public function addCar(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
-
         $product = new Car();
         $product->setName('Vis');
         $product->setDescription('This car is good!');
         $product->setPrice(122);
-
         $entityManager->persist($product);
-
         $entityManager->flush();
 
-        return new Response('Saved new product with id '.$product->getId());
+        return new Response('Saved new product with id ' . $product->getId());
     }
 
     /**
@@ -45,10 +42,10 @@ class CarController extends AbstractController
         $car = $doctrine->getRepository(Car::class)->find($id);
         if (!$car) {
             throw $this->createNotFoundException(
-                'No car found for id '.$id
+                'No car found for id ' . $id
             );
         }
-        return new Response("The car with the id $id is: ".$car->getName());
+        return new Response("The car with the id $id is: " . $car->getName());
     }
 
     /**
@@ -56,6 +53,6 @@ class CarController extends AbstractController
      */
     public function showByEntity(Car $car): Response
     {
-        return new Response("The car with the id is: ".$car->getName());
+        return new Response("The car with the id is: " . $car->getName());
     }
 }

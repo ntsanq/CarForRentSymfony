@@ -53,7 +53,7 @@ class DefaultController extends AbstractController
     {
         $routeName = $request->attributes->get('_route');
         $allAttributes = $request->attributes->all();
-        return new Response("Title attribute: ". $allAttributes['title']);
+        return new Response("Title attribute: " . $allAttributes['title']);
     }
 
     /**

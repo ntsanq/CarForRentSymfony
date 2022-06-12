@@ -50,8 +50,7 @@ class CarRepository extends ServiceEntityRepository
             ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function findOneBySomeField($value): ?Car
@@ -60,7 +59,6 @@ class CarRepository extends ServiceEntityRepository
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 }

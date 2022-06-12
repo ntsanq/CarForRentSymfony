@@ -67,11 +67,8 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/hello/{page}", name="blog_hello", defaults={"page": 1, "title": "Hello world!"})
      */
-    public function helloWorld($page ,$title ): Response
+    public function helloWorld($page, $title): Response
     {
-        return new Response("Page is ".$page." and Title is ".$title);
+        return new Response("Page is " . $page . " and Title is " . $title);
     }
-    
-    
-    
 }
