@@ -9,9 +9,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route (
+ *      "/car",
+ *     name = "car_"
+ * )
+ */
 class CarController extends AbstractController
 {
-    #[Route('/car', name: 'app_car')]
+    /**
+     * @Route (
+     *      "/",
+     *     name = "index"
+     * )
+     */
     public function index(): Response
     {
         return $this->render('car/index.html.twig', [
@@ -20,26 +31,48 @@ class CarController extends AbstractController
     }
 
     /**
-     * @Route("/addcar", name="add_car")
+     * @Route (
+     *
+     * )
+     */
+    public function new()
+    {
+        $product = new Car();
+    }
+
+    /**
+     * @Route("/add", name="add_by_entity_manager")
      */
     public function addCar(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
-        $product = new Car();
-        $product->setName('Vis');
-        $product->setDescription('This car is good!');
-        $product->setPrice(122);
-        $product->setImg('https://sdhd.sdfjfsod/dsfjsdfiudsf');
-        $entityManager->persist($product);
+        $car = new Car();
+        $car->setName('Vis');
+        $car->setDescription('This car is good!');
+        $car->setPrice(122);
+        $car->setImg('https://sdhd.sdfjfsod/dsfjsdfiudsf');
+        $entityManager->persist($car);
         $entityManager->flush();
 
-        return new Response('Saved new product with id ' . $product->getId());
+        return new Response('Saved new product with id ' . $car->getId());
     }
 
     /**
-     * @Route("/car/{id}", name="show_car")
+     * @Route(
+     *     "/all",
+     *     name = "show_all"
+     * )
      */
-    public function show(ManagerRegistry $doctrine, int $id): Response
+    public function showAllCars(CarRepository $carRepository): Response
+    {
+        $cars = $carRepository->findAll();
+        return $this->render('home/index.html.twig', ['cars' => $cars]);
+    }
+
+    /**
+     * @Route("/{id}", name="show_by_id")
+     */
+    public function showCarById(ManagerRegistry $doctrine, int $id): Response
     {
         $car = $doctrine->getRepository(Car::class)->find($id);
         if (!$car) {
@@ -51,22 +84,11 @@ class CarController extends AbstractController
     }
 
     /**
-     * @Route("/car/entity/{id}", name="entity_show_car")
+     * @Route("/car/entity/{id}", name="entity_show")
      */
     public function showByEntity(Car $car): Response
     {
         return new Response("The car with the id is: " . $car->getName());
     }
 
-    /**
-     * @Route(
-     *     "/allcar",
-     *     name = "show_all_car"
-     * )
-     */
-    public function showAllCars(CarRepository $carRepository)
-    {
-        $cars = $carRepository->findAll();
-        return $this->render('home/index.html.twig', ['cars' => $cars]);
-    }
 }
