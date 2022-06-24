@@ -28,14 +28,12 @@ class SendMessageCommand extends Command
     {
         $params = [
             'DelaySeconds' => 10,
-
-            'MessageBody' => "Hello baby!",
+            'MessageBody' => "Hello baby!5",
             'QueueUrl' => $this->containerBag->get('sqsUrl')
         ];
 
         try {
-            $result = $this->sqs->sendMessage($params);
-            var_dump($result);
+            $this->sqs->sendMessage($params);
         } catch (AwsException $e) {
             error_log($e->getMessage());
         }
