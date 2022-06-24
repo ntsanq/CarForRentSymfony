@@ -8,6 +8,7 @@ parameters:
     s3Url: '%env(S3_URL)%'
     zohoMail: '%env(ZOHO_MAIL)%'
     zohoPassword: '%env(ZOHO_PASSWORD)%'
+    zohoHost: '%env(ZOHO_HOST)%'
 
 services:
     # default configuration for services in *this* file
