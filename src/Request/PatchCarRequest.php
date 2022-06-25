@@ -18,7 +18,7 @@ class PatchCarRequest extends BaseRequest
     #[Assert\Type('string')]
     private $brand;
 
-    #[Assert\Type('float')]
+    #[Assert\Type('numeric')]
     private $price = null;
 
     #[Assert\Choice(choices: self::SEATS, message: 'Enter a valid seat type')]

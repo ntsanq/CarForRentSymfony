@@ -20,7 +20,7 @@ class AddCarRequest extends BaseRequest
     #[Assert\Type('string')]
     private $brand;
 
-    #[Assert\Type('float')]
+    #[Assert\Type('numeric')]
     private float $price;
 
     #[Assert\Type('integer')]

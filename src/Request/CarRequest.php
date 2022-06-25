@@ -7,6 +7,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CarRequest extends BaseRequest
 {
     const ORDER_TYPE_LIST = ['asc', 'desc'];
+    const DEFAULT_LIMIT = 10;
+    const DEFAULT_ORDER_TYPE = 'desc';
+    const DEFAULT_ORDER_BY = 'createdAt';
 
     #[Assert\Type('string')]
     private $color = '';
@@ -18,14 +21,14 @@ class CarRequest extends BaseRequest
     private $brand = '';
 
     #[Assert\Type('string')]
-    private $orderBy = 'createdAt';
+    private $orderBy = self::DEFAULT_ORDER_BY;
 
-    #[Assert\Choice(choices: self::ORDER_TYPE_LIST, message: 'choose a valid column to order by')]
+    #[Assert\Choice(choices: self::ORDER_TYPE_LIST, message: 'choose a valid column to order type')]
     #[Assert\Type('string')]
-    private $orderType = 'desc';
+    private $orderType = self::DEFAULT_ORDER_TYPE;
 
     #[Assert\Type('int')]
-    private $limit = 10;
+    private $limit = self::DEFAULT_LIMIT;
 
     /**
      * @return string
@@ -122,5 +125,5 @@ class CarRequest extends BaseRequest
     {
         $this->limit = $limit;
     }
-    
+
 }
