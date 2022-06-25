@@ -46,4 +46,9 @@ class ImageRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
+
 }

@@ -13,4 +13,13 @@ class ImageTransformer extends BaseTransformer
             'path'=>$image->getPath()
         ];
     }
+
+    public function toArray(array $cars): array
+    {
+        $data = [];
+        foreach ($cars as $car) {
+            $data[] = $this->objectToArray($car);
+        }
+        return $data;
+    }
 }

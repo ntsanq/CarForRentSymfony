@@ -2,6 +2,7 @@
 
 namespace App\Controller\API;
 
+use App\Repository\ImageRepository;
 use App\Request\ImageRequest;
 use App\Service\ImageService;
 use App\Traits\JsonResponseTrait;
@@ -9,6 +10,7 @@ use App\Transformer\ImageTransformer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/api', name: 'api_')]
@@ -23,8 +25,8 @@ class ImageController
         Request            $request,
         ImageRequest       $imageRequest,
         ValidatorInterface $validator,
-        ImageService $imageService,
-        ImageTransformer $imageTransformer
+        ImageService       $imageService,
+        ImageTransformer   $imageTransformer
     ): JsonResponse
     {
         $file = $request->files->get('thumbnail');
@@ -39,4 +41,15 @@ class ImageController
         return $this->success($result);
     }
 
+    #[Route('/image/list', name: 'image_list')]
+    public function list(
+        ImageService     $imageService,
+        ImageTransformer $imageTransformer
+    ): JsonResponse
+    {
+        $images = $imageService->listAll();
+        $data = $imageTransformer->toArray($images);
+
+        return $this->success($data);
+    }
 }

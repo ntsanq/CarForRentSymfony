@@ -28,4 +28,10 @@ class ImageService
 
         return $image;
     }
+
+    public function listAll(): array
+    {
+        return $this->imageRepository->getAll();
+    }
+
 }
