@@ -34,6 +34,8 @@ $ composer install
 
 Usage
 ------------
+
+### Run Server
  - Method 1:
 
 You can see [How to configure a Web Server for Symfony](https://symfony.com/doc/current/setup/web_server_configuration.html) with Nginx
@@ -44,10 +46,11 @@ $ symfony server:start
 Then simply browse to the address [localhost:8000](http://localhost:8000/) in your browser
 
 
-- API:
+### USE API:
 ```sh  
 $ php bin/console lexik:jwt:generate-keypair
-``` 
+```  
+- [API Documentation](https://documenter.getpostman.com/view/21188878/UzBsGP8K#57ae3f7d-2356-4997-ac12-117fabfe1510)
 
 ## Authors
 
